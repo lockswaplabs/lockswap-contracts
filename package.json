@@ -1,8 +1,8 @@
 {
-  "name": "@venomswap/contracts",
-  "version": "1.0.1",
+  "name": "@lootswap/contracts",
+  "version": "2.0.0",
   "license": "MIT",
-  "description": "🐍 Token + 🧑‍🌾 Liquidity Mining contracts for VenomSwap & the Venom Protocol",
+  "description": "Loot Token + 🧑‍🌾 Liquidity Mining contracts for LootSwap & the LootSwap Protocol",
   "files": [
     "contracts",
     "build"
@@ -10,16 +10,15 @@
   "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VenomProtocol/venomswap-contracts.git"
+    "url": "git+https://github.com/LootSwap/lootswap-contracts.git"
   },
   "bugs": {
-    "url": "https://github.com/VenomProtocol/venomswap-contracts/issues"
+    "url": "https://github.com/LootSwap/lootswap-contracts/issues"
   },
-  "homepage": "https://github.com/VenomProtocol/venomswap-contracts#readme",
+  "homepage": "https://github.com/LootSwap/lootswap-contracts#readme",
   "keywords": [
-    "venomprotocol",
-    "venomdao",
-    "venomswap",
+    "LootSwap",
+    "loot",
     "ethereum",
     "binance smart chain",
     "harmony"
@@ -40,9 +39,9 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.1.0",
-    "@venomswap/core": "^1.0.0",
-    "@venomswap/lib": "^1.0.0",
-    "@venomswap/periphery": "^1.0.0"
+    "@lootswap/core": "^2.0.0",
+    "@lootswap/lib": "^2.0.0",
+    "@lootswap/periphery": "^2.0.0"
   },
   "scripts": {
     "lint": "yarn prettier ./test/*.ts --check",

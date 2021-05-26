@@ -19,7 +19,7 @@ const MANUAL_MINT_LIMIT = expandTo18Decimals(50000)
 const LOCK_FROM_BLOCK = 100
 const LOCK_TO_BLOCK = 200
 
-describe('Viper', () => {
+describe('Loot', () => {
   const provider = new MockProvider({
     hardfork: 'istanbul',
     mnemonic: 'horn horn horn horn horn horn horn horn horn horn horn horn',
@@ -29,14 +29,14 @@ describe('Viper', () => {
 
   let token: Contract
   beforeEach(async () => {
-    token = await deployContract(alice, GovernanceToken, ["Viper", "VIPER", TOTAL_CAP, MANUAL_MINT_LIMIT, LOCK_FROM_BLOCK, LOCK_TO_BLOCK])
+    token = await deployContract(alice, GovernanceToken, ["Loot", "LOOT", TOTAL_CAP, MANUAL_MINT_LIMIT, LOCK_FROM_BLOCK, LOCK_TO_BLOCK])
     await token.mint(alice.address, TOTAL_SUPPLY)
   })
 
   it('should have correct values for: name, symbol, decimals, totalSupply, balanceOf', async () => {
     const name = await token.name()
-    expect(name).to.eq('Viper')
-    expect(await token.symbol()).to.eq('VIPER')
+    expect(name).to.eq('Loot')
+    expect(await token.symbol()).to.eq('LOOT')
     expect(await token.decimals()).to.eq(18)
     expect(await token.totalSupply()).to.eq(TOTAL_SUPPLY)
     expect(await token.balanceOf(alice.address)).to.eq(TOTAL_SUPPLY)
