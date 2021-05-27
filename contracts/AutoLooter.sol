@@ -23,7 +23,7 @@ contract AutoLooter is Ownable {
     IUniswapV2Factory public immutable factory;
     //0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac
     // V1 - V5: OK
-    address public immutable lootChest;
+    address public immutable quest;
     //0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272
     // V1 - V5: OK
     address private immutable govToken;
@@ -54,7 +54,7 @@ contract AutoLooter is Ownable {
         address _weth
     ) public {
         factory = IUniswapV2Factory(_factory);
-        lootChest = _lootChest;
+        quest = _lootChest;
         govToken = _govToken;
         weth = _weth;
     }
@@ -93,8 +93,8 @@ contract AutoLooter is Ownable {
 
     // F1 - F10: OK
     // F3: _convert is separate to save gas by only checking the 'onlyEOA' modifier once in case of convertMultiple
-    // F6: There is an exploit to add lots of GovernanceTokens to the lootChest, run convert, then remove the GovernanceTokens again.
-    //     As the size of the LootChest has grown, this requires large amounts of funds and isn't super profitable anymore
+    // F6: There is an exploit to add lots of GovernanceTokens to the quest, run convert, then remove the GovernanceTokens again.
+    //     As the size of the Quests has grown, this requires large amounts of funds and isn't super profitable anymore
     //     The onlyEOA modifier prevents this being done with a flash loan.
     // C1 - C24: OK
     function convert(address token0, address token1) external onlyEOA() {
@@ -156,7 +156,7 @@ contract AutoLooter is Ownable {
         if (token0 == token1) {
             uint256 amount = amount0.add(amount1);
             if (token0 == govToken) {
-                IERC20(govToken).safeTransfer(lootChest, amount);
+                IERC20(govToken).safeTransfer(quest, amount);
                 govTokenOut = amount;
             } else if (token0 == weth) {
                 govTokenOut = _toGovToken(weth, amount);
@@ -167,11 +167,11 @@ contract AutoLooter is Ownable {
             }
         } else if (token0 == govToken) {
             // eg. GovToken - ETH
-            IERC20(govToken).safeTransfer(lootChest, amount0);
+            IERC20(govToken).safeTransfer(quest, amount0);
             govTokenOut = _toGovToken(token1, amount1).add(amount0);
         } else if (token1 == govToken) {
             // eg. USDT - GovToken
-            IERC20(govToken).safeTransfer(lootChest, amount1);
+            IERC20(govToken).safeTransfer(quest, amount1);
             govTokenOut = _toGovToken(token0, amount0).add(amount1);
         } else if (token0 == weth) {
             // eg. ETH - USDC
@@ -259,6 +259,6 @@ contract AutoLooter is Ownable {
         returns (uint256 amountOut)
     {
         // X1 - X5: OK
-        amountOut = _swap(token, govToken, amountIn, lootChest);
+        amountOut = _swap(token, govToken, amountIn, quest);
     }
 }

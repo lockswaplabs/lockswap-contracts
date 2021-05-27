@@ -6,14 +6,14 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-// The LootChest is a lootChest full of creatures with a tendency to breed.
-// The longer you stay, the more creatures you end up with when you leave.
+// The Quests is a quest full of rewards and treasure.
+// The longer you stay, the more loot you end up with when you leave.
 // This contract handles swapping to and from xGovernanceToken <> GovernanceToken
-contract LootChest is ERC20 {
+contract Quests is ERC20 {
     using SafeMath for uint256;
     IERC20 public govToken;
 
-    // Define the LootChest token contract
+    // Define the Quests token contract
     constructor(
       string memory _name,
       string memory _symbol,
