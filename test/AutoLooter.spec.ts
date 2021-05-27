@@ -6,7 +6,7 @@ import { expandTo18Decimals } from './shared/utilities'
 import { deployGovernanceToken } from './shared/deploy'
 import { createLpToken } from './shared/lp'
 
-import LootChest from '../build/LootChest.json'
+import Quests from '../build/Quests.json'
 import AutoLooter from '../build/AutoLooter.json'
 import ERC20Mock from '../build/ERC20Mock.json'
 import UniswapV2Factory from '@lootswap/core/build/UniswapV2Factory.json'
@@ -24,7 +24,7 @@ describe('AutoLooter', () => {
   const wallets = provider.getWallets()
   const [alice] = wallets
 
-  let lootChest: Contract
+  let quest: Contract
   let factory: Contract
   let pairFactory: ContractFactory
   let autoLooter: Contract
@@ -48,10 +48,10 @@ describe('AutoLooter', () => {
     weth = await deployContract(alice, ERC20Mock, ["WETH", "ETH", expandTo18Decimals(10000000)])
     await weth.transfer(alice.address, expandTo18Decimals(100000))
 
-    lootChest = await deployContract(alice, LootChest, ["LootChest", "aLOOT", govToken.address])
+    quest = await deployContract(alice, Quests, ["Quests", "aLOOT", govToken.address])
     factory = await deployContract(alice, UniswapV2Factory, [alice.address])
     pairFactory = new ContractFactory(UniswapV2Pair.abi, UniswapV2Pair.bytecode, alice)
-    autoLooter = await deployContract(alice, AutoLooter, [factory.address, lootChest.address, govToken.address, weth.address])
+    autoLooter = await deployContract(alice, AutoLooter, [factory.address, quest.address, govToken.address, weth.address])
     exploiter = await deployContract(alice, AutoLooterExploitMock, [autoLooter.address])
     
     busd = await deployContract(alice, ERC20Mock, ["Binance USD", "BUSD", expandTo18Decimals(10000000)])
@@ -81,9 +81,9 @@ describe('AutoLooter', () => {
   })
 
   describe("initialization", function () {
-    it('should have correct values for: factory & lootChest', async () => {
+    it('should have correct values for: factory & quest', async () => {
       expect(await autoLooter.factory()).to.eq(factory.address)
-      expect(await autoLooter.lootChest()).to.eq(lootChest.address)
+      expect(await autoLooter.quest()).to.eq(quest.address)
     })
   })
 
@@ -114,7 +114,7 @@ describe('AutoLooter', () => {
       
       expect(await govToken.balanceOf(autoLooter.address)).to.equal(0)
       expect(await pairs['loot/weth'].balanceOf(autoLooter.address)).to.equal(0)
-      expect(await govToken.balanceOf(lootChest.address)).to.equal("189756927078123437031")
+      expect(await govToken.balanceOf(quest.address)).to.equal("189756927078123437031")
     })
 
     it("should convert GovernanceToken/BUSD", async function () {
@@ -123,7 +123,7 @@ describe('AutoLooter', () => {
       
       expect(await govToken.balanceOf(autoLooter.address)).to.equal(0)
       expect(await pairs['loot/busd'].balanceOf(autoLooter.address)).to.equal(0)
-      expect(await govToken.balanceOf(lootChest.address)).to.equal("189756927078123437031")
+      expect(await govToken.balanceOf(quest.address)).to.equal("189756927078123437031")
     })
 
     it("should convert using standard ETH path", async function () {
@@ -132,7 +132,7 @@ describe('AutoLooter', () => {
       
       expect(await govToken.balanceOf(autoLooter.address)).to.equal(0)
       expect(await pairs['busd/weth'].balanceOf(autoLooter.address)).to.equal(0)
-      expect(await govToken.balanceOf(lootChest.address)).to.equal("159089825138293427601")
+      expect(await govToken.balanceOf(quest.address)).to.equal("159089825138293427601")
     })
 
     it("converts LINK/BUSD using a more complex path", async function () {
@@ -144,7 +144,7 @@ describe('AutoLooter', () => {
       
       expect(await govToken.balanceOf(autoLooter.address)).to.equal(0)
       expect(await pairs['busd/link'].balanceOf(autoLooter.address)).to.equal(0)
-      expect(await govToken.balanceOf(lootChest.address)).to.equal("159089825138293427601")
+      expect(await govToken.balanceOf(quest.address)).to.equal("159089825138293427601")
     })
 
     it("converts DAI/BUSD using a more complex path", async function () {
@@ -156,7 +156,7 @@ describe('AutoLooter', () => {
       
       expect(await govToken.balanceOf(autoLooter.address)).to.equal(0)
       expect(await pairs['busd/dai'].balanceOf(autoLooter.address)).to.equal(0)
-      expect(await govToken.balanceOf(lootChest.address)).to.equal("159089825138293427601")
+      expect(await govToken.balanceOf(quest.address)).to.equal("159089825138293427601")
     })
 
     it("converts DAI/LINK using two step path", async function () {
@@ -168,7 +168,7 @@ describe('AutoLooter', () => {
       
       expect(await govToken.balanceOf(autoLooter.address)).to.equal(0)
       expect(await pairs['dai/link'].balanceOf(autoLooter.address)).to.equal(0)
-      expect(await govToken.balanceOf(lootChest.address)).to.equal("120096301672136374965")
+      expect(await govToken.balanceOf(quest.address)).to.equal("120096301672136374965")
     })
 
     it("reverts if caller is not EOA", async function () {
@@ -189,7 +189,7 @@ describe('AutoLooter', () => {
       
       expect(await govToken.balanceOf(autoLooter.address)).to.equal(0)
       expect(await pairs['busd/link'].balanceOf(autoLooter.address)).to.equal(expandTo18Decimals(100))
-      expect(await govToken.balanceOf(lootChest.address)).to.equal(0)
+      expect(await govToken.balanceOf(quest.address)).to.equal(0)
     }).retries(5)
   })
 
@@ -202,7 +202,7 @@ describe('AutoLooter', () => {
 
       expect(await govToken.balanceOf(autoLooter.address)).to.equal(0)
       expect(await pairs['dai/weth'].balanceOf(autoLooter.address)).to.equal(0)
-      expect(await govToken.balanceOf(lootChest.address)).to.equal("318658355868778309848")
+      expect(await govToken.balanceOf(quest.address)).to.equal("318658355868778309848")
     })
   })
 
