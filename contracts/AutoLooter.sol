@@ -49,12 +49,12 @@ contract AutoLooter is Ownable {
 
     constructor(
         address _factory,
-        address _lootChest,
+        address _quest,
         address _govToken,
         address _weth
     ) public {
         factory = IUniswapV2Factory(_factory);
-        quest = _lootChest;
+        quest = _quest;
         govToken = _govToken;
         weth = _weth;
     }
