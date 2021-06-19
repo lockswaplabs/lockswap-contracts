@@ -1,8 +1,8 @@
 {
-  "name": "@lootswap/contracts",
+  "name": "@lockswap/contracts",
   "version": "2.0.2",
   "license": "MIT",
-  "description": "Loot Token + 🧑‍🌾 Liquidity Mining contracts for LootSwap & the LootSwap Protocol",
+  "description": "Lock Token + 🧑‍🌾 Liquidity Mining contracts for LockSwap & the LockSwap Protocol",
   "files": [
     "contracts",
     "build"
@@ -10,15 +10,15 @@
   "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LootSwap/lootswap-contracts.git"
+    "url": "git+https://github.com/LockSwap/lockswap-contracts.git"
   },
   "bugs": {
-    "url": "https://github.com/LootSwap/lootswap-contracts/issues"
+    "url": "https://github.com/LockSwap/lockswap-contracts/issues"
   },
-  "homepage": "https://github.com/LootSwap/lootswap-contracts#readme",
+  "homepage": "https://github.com/LockSwap/lockswap-contracts#readme",
   "keywords": [
-    "LootSwap",
-    "loot",
+    "LockSwap",
+    "lock",
     "ethereum",
     "binance smart chain",
     "harmony"
@@ -39,9 +39,9 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.1.0",
-    "@lootswap/core": "^2.0.0",
-    "@lootswap/lib": "^2.0.0",
-    "@lootswap/periphery": "^2.0.0"
+    "@lockswap/core": "^2.0.1",
+    "@lockswap/lib": "^2.0.3",
+    "@lockswap/periphery": "^2.0.0"
   },
   "scripts": {
     "lint": "yarn prettier ./test/*.ts --check",

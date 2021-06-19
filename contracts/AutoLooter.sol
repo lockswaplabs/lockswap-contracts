@@ -3,9 +3,9 @@
 // P1 - P3: OK
 pragma solidity 0.6.12;
 
-import "@lootswap/core/contracts/interfaces/IUniswapV2Factory.sol";
-import "@lootswap/core/contracts/interfaces/IUniswapV2Pair.sol";
-import "@lootswap/core/contracts/interfaces/IUniswapV2ERC20.sol";
+import "@lockswap/core/contracts/interfaces/IUniswapV2Factory.sol";
+import "@lockswap/core/contracts/interfaces/IUniswapV2Pair.sol";
+import "@lockswap/core/contracts/interfaces/IUniswapV2ERC20.sol";
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";

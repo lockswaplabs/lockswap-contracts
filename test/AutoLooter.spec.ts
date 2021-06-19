@@ -9,8 +9,8 @@ import { createLpToken } from './shared/lp'
 import Quests from '../build/Quests.json'
 import AutoLooter from '../build/AutoLooter.json'
 import ERC20Mock from '../build/ERC20Mock.json'
-import UniswapV2Factory from '@lootswap/core/build/UniswapV2Factory.json'
-import UniswapV2Pair from '@lootswap/core/build/UniswapV2Pair.json'
+import UniswapV2Factory from '@lockswap/core/build/UniswapV2Factory.json'
+import UniswapV2Pair from '@lockswap/core/build/UniswapV2Pair.json'
 import AutoLooterExploitMock from '../build/AutoLooterExploitMock.json'
 
 chai.use(solidity)

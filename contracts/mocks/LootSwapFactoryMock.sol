@@ -2,7 +2,7 @@
 
 pragma solidity 0.6.12;
 
-import "@lootswap/core/contracts/UniswapV2Factory.sol";
+import "@lockswap/core/contracts/UniswapV2Factory.sol";
 
 contract LootSwapFactoryMock is UniswapV2Factory {
     constructor(address _feeToSetter) public UniswapV2Factory(_feeToSetter) {}
